@@ -10,26 +10,20 @@ Get your API token from: https://app.todoist.com/app/settings/integrations/devel
 
 ### Build the .mcpb from source
 
-```bash
-npm install
-npm run build
+Requires [`just`](https://github.com/casey/just) (`brew install just`):
 
-mkdir -p build-mcpb/server
-cp manifest.json build-mcpb/manifest.json
-cp -r dist build-mcpb/server/dist
-cp package.json package-lock.json build-mcpb/server/
-(cd build-mcpb/server && npm ci --omit=dev --ignore-scripts)
-npx @anthropic-ai/mcpb pack build-mcpb todoist-mcp-server.mcpb
-rm -rf build-mcpb
+```bash
+just bundle
 ```
+
+That installs deps, compiles, stages a clean dependency tree, and packs `todoist-mcp-server.mcpb` at the repo root. Other recipes: `just build`, `just run`, `just clean`. Run `just` with no args to list them all.
 
 ## Manual configuration (alternative)
 
 If you'd rather wire up the server directly without packaging:
 
 ```bash
-npm install
-npm run build
+just build
 ```
 
 Create a `.env` file:
