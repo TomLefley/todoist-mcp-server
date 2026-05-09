@@ -1,0 +1,115 @@
+Group,Method,Path,Description,Official MCP,Our MCP,Notes
+Tasks,GET,/tasks,List active tasks,yes,yes,find-tasks
+Tasks,POST,/tasks,Create task,yes,yes,add-tasks
+Tasks,GET,/tasks/{id},Get task,yes,yes,fetch-object
+Tasks,POST,/tasks/{id},Update task,yes,yes,update-tasks
+Tasks,DELETE,/tasks/{id},Delete task,yes,yes,delete-object
+Tasks,POST,/tasks/{id}/close,Complete task,yes,yes,complete-tasks
+Tasks,POST,/tasks/{id}/reopen,Reopen task,yes,yes,uncomplete-tasks
+Tasks,POST,/tasks/{id}/move,Move task,yes,yes,update-tasks (moves to project/section/parent)
+Tasks,POST,/tasks/quick_add,Quick add via natural language,yes,no,(no tool wraps quick_add; add-tasks uses structured fields only)
+Tasks,GET,/tasks/completed,Completed tasks (generic),yes,yes,find-completed-tasks
+Tasks,GET,/tasks/completed/by_completion_date,Completed by completion date,yes,no,(find-completed-tasks only hits the generic /completed endpoint)
+Tasks,GET,/tasks/completed/by_due_date,Completed by due date,yes,no,(not exposed)
+Tasks,GET,/tasks/filter,Run a filter query,yes,no,(no support for Todoist filter grammar; find-tasks does client-side filtering only)
+Projects,GET,/projects,List projects,yes,yes,find-projects
+Projects,POST,/projects,Create project,yes,yes,add-projects
+Projects,GET,/projects/{id},Get project,yes,yes,fetch-object
+Projects,POST,/projects/{id},Update project,yes,yes,update-projects / project-management
+Projects,DELETE,/projects/{id},Delete project,yes,yes,delete-object / project-management
+Projects,POST,/projects/{id}/archive,Archive project,yes,yes,archive-project
+Projects,POST,/projects/{id}/unarchive,Unarchive project,yes,yes,unarchive-project
+Projects,POST,/projects/{id}/join,Join shared/workspace project,yes,no,(not exposed)
+Projects,GET,/projects/{id}/collaborators,List collaborators,yes,yes,find-project-collaborators
+Projects,GET,/projects/{id}/permissions,Current user's permissions,unknown,no,(not exposed; reachable via generic fetch tool)
+Projects,GET,/projects/search,Search projects,yes,yes,search-projects
+Projects,GET,/projects/archived,List archived projects,unknown,no,(not exposed)
+Sections,GET,/sections,List sections,yes,yes,find-sections
+Sections,POST,/sections,Create section,yes,yes,add-sections
+Sections,GET,/sections/{id},Get section,yes,yes,fetch-object
+Sections,POST,/sections/{id},Update section,yes,yes,update-sections
+Sections,DELETE,/sections/{id},Delete section,yes,yes,delete-object
+Sections,POST,/sections/{id}/archive,Archive section,yes,yes,archive-section
+Sections,POST,/sections/{id}/unarchive,Unarchive section,yes,yes,unarchive-section
+Sections,GET,/sections/search,Search sections,yes,yes,search-sections
+Comments,GET,/comments,List comments,yes,yes,find-comments
+Comments,POST,/comments,Create comment,yes,yes,add-comments
+Comments,GET,/comments/{id},Get comment,yes,yes,fetch-object
+Comments,POST,/comments/{id},Update comment,yes,yes,update-comments
+Comments,DELETE,/comments/{id},Delete comment,yes,yes,delete-object
+Labels,GET,/labels,List personal labels,yes,yes,find-labels
+Labels,POST,/labels,Create label,yes,yes,add-labels
+Labels,GET,/labels/{id},Get label,yes,yes,fetch-object
+Labels,POST,/labels/{id},Update label,yes,no,(api.updateLabel exists but no tool exposes it)
+Labels,DELETE,/labels/{id},Delete label,yes,yes,delete-object
+Labels,GET,/labels/search,Search labels,yes,yes,search-labels
+Labels,GET,/labels/shared,List shared labels,yes,yes,find-shared-labels
+Labels,POST,/labels/shared/rename,Rename shared label,unknown,no,(not exposed)
+Labels,POST,/labels/shared/remove,Remove shared label,unknown,no,(not exposed)
+Reminders,GET,/reminders,List time-based reminders,yes,yes,find-reminders
+Reminders,POST,/reminders,Create reminder,yes,yes,add-reminders
+Reminders,GET,/reminders/{id},Get reminder,yes,no,(reminder not in fetch-object enum)
+Reminders,POST,/reminders/{id},Update reminder,yes,yes,update-reminders
+Reminders,DELETE,/reminders/{id},Delete reminder,yes,no,(reminder not in delete-object enum)
+Reminders,GET,/reminders/locations,List location reminders,unknown,no,(not exposed)
+Reminders,POST,/reminders/locations,Create location reminder,unknown,no,(not exposed)
+Reminders,GET,/reminders/locations/{id},Get location reminder,unknown,no,(not exposed)
+Reminders,POST,/reminders/locations/{id},Update location reminder,unknown,no,(not exposed)
+Reminders,DELETE,/reminders/locations/{id},Delete location reminder,unknown,no,(not exposed)
+User,GET,/user,Current user info,yes,yes,user-info
+User,PUT,/user/notification_settings,Update notification settings,unknown,no,(not exposed)
+User,GET,/user/productivity_stats,Productivity stats / karma,yes,no,(get-productivity-stats hits legacy /tasks/completed/stats instead of /user/productivity_stats)
+Filters,GET,/filters,List filters,yes,no,(find-filters is a stub returning guidance text)
+Filters,POST,/filters,Create filter,yes,no,(add-filters is a stub)
+Filters,POST,/filters/{id},Update filter,yes,no,(update-filters is a stub)
+Filters,DELETE,/filters/{id},Delete filter,yes,no,(filter not in delete-object enum)
+Filters,GET,/workspace_filters,List workspace filters,unknown,no,(not exposed)
+Filters,POST,/workspace_filters,Create workspace filter,unknown,no,(not exposed)
+Filters,POST,/workspace_filters/{id},Update workspace filter,unknown,no,(not exposed)
+Filters,DELETE,/workspace_filters/{id},Delete workspace filter,unknown,no,(not exposed)
+Workspaces,GET,/workspaces,List workspaces,yes,no,(list-workspaces actually returns /user info instead of workspaces)
+Workspaces,POST,/workspaces,Create workspace,unknown,no,(not exposed)
+Workspaces,GET,/workspaces/{id},Get workspace,unknown,no,(not exposed)
+Workspaces,POST,/workspaces/{id},Update workspace,unknown,no,(not exposed)
+Workspaces,DELETE,/workspaces/{id},Delete workspace,unknown,no,(not exposed)
+Workspaces,POST,/workspaces/{id}/join,Join workspace,unknown,no,(not exposed)
+Workspaces,POST,/workspaces/{id}/leave,Leave workspace,unknown,no,(not exposed)
+Workspaces,GET,/workspaces/{id}/projects,Workspace active projects,unknown,no,(not exposed)
+Workspaces,GET,/workspaces/{id}/projects/archived,Workspace archived projects,unknown,no,(not exposed)
+Workspaces,POST,/workspaces/{id}/logo,Upload workspace logo,unknown,no,(not exposed)
+Workspaces,GET,/workspaces/users,List workspace users,unknown,no,(not exposed)
+Workspaces,POST,/workspaces/{id}/users,Invite user(s),unknown,no,(not exposed)
+Workspaces,POST,/workspaces/{id}/users/{user_id},Update user,unknown,no,(not exposed)
+Workspaces,DELETE,/workspaces/{id}/users/{user_id},Remove user,unknown,no,(not exposed)
+Workspaces,GET,/workspaces/{id}/invitations,List invitations,unknown,no,(not exposed)
+Workspaces,POST,/workspaces/{id}/invitations,Create invitations,unknown,no,(not exposed)
+Workspaces,POST,/workspaces/{id}/invitations/{email}/resend,Resend invitation,unknown,no,(not exposed)
+Workspaces,PUT,/workspaces/{id}/invitations/{email}/accept,Accept invitation,unknown,no,(not exposed)
+Workspaces,PUT,/workspaces/{id}/invitations/{email}/reject,Reject invitation,unknown,no,(not exposed)
+Workspaces,DELETE,/workspaces/{id}/invitations/{email},Delete invitation,unknown,no,(not exposed)
+Workspaces,GET,/workspaces/{id}/plan,Plan details,unknown,no,(not exposed)
+Activity,GET,/activity/logs,Activity log events,yes,no,(find-activity actually hits /tasks/completed not the activity log)
+Templates,POST,/templates/import_into_project/{id},Import template into project,unknown,no,(not exposed)
+Templates,POST,/templates/import_into_project_from_file,Import template from CSV,unknown,no,(not exposed)
+Templates,POST,/templates/create_project_from_file,Create project from CSV,unknown,no,(not exposed)
+Templates,GET,/templates/export,Export project as template,unknown,no,(not exposed)
+Backups,GET,/backups,List backups,unknown,no,(not exposed)
+Backups,GET,/backups/download,Download backup ZIP,unknown,no,(not exposed)
+Uploads,POST,/uploads,Upload file attachment,unknown,no,(not exposed)
+Uploads,DELETE,/uploads/{id},Delete upload,unknown,no,(not exposed)
+Sync,POST,/sync,Batch read/write commands,unknown,no,(not exposed; reachable via generic fetch tool)
+OAuth,POST,/oauth/authorize,Authorization request,no,no,(out of scope for personal-token MCP)
+OAuth,POST,/oauth/access_token,Exchange code for token,no,no,(out of scope)
+OAuth,POST,/oauth/register,Dynamic client registration,no,no,(out of scope)
+OAuth,POST,/access_tokens/migrate_personal_token,Migrate personal token,no,no,(out of scope)
+OAuth,DELETE,/access_tokens,Revoke access token,no,no,(out of scope)
+OAuth,POST,/revoke,RFC 7009 token revocation,no,no,(out of scope)
+Other,GET,/colors,Available color palette,unknown,no,(not exposed)
+Other,GET,/id_mappings,Map v9<->v1 IDs,unknown,no,(not exposed)
+Other,GET,/folders,List folders,unknown,no,(not exposed)
+Other,POST,/folders,Create folder,unknown,no,(not exposed)
+Other,GET,/folders/{id},Get folder,unknown,no,(not exposed)
+Other,POST,/folders/{id},Update folder,unknown,no,(not exposed)
+Other,DELETE,/folders/{id},Delete folder,unknown,no,(not exposed)
+Other,PUT,/emails,Get-or-create email-to-task address,unknown,no,(not exposed)
+Other,DELETE,/emails/{id},Disable email-to-task,unknown,no,(not exposed)
