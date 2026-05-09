@@ -65,6 +65,12 @@ export class TodoistAPI {
     return this.getAllResults(`${API_BASE}/tasks`, params);
   }
 
+  async getTasksByFilter(query: string, lang?: string): Promise<unknown[]> {
+    const params: Record<string, string> = { query };
+    if (lang) params.lang = lang;
+    return this.getAllResults(`${API_BASE}/tasks/filter`, params);
+  }
+
   async getTask(id: string): Promise<unknown> {
     return this.request(`${API_BASE}/tasks/${id}`);
   }
@@ -107,8 +113,23 @@ export class TodoistAPI {
     return this.request(`${API_BASE}/tasks/completed${qs}`);
   }
 
-  async getCompletedStats(): Promise<unknown> {
-    return this.request(`${API_BASE}/tasks/completed/stats`);
+  async getCompletedByCompletionDate(params: Record<string, string>): Promise<unknown[]> {
+    return this.getAllResults(`${API_BASE}/tasks/completed/by_completion_date`, params);
+  }
+
+  async getCompletedByDueDate(params: Record<string, string>): Promise<unknown[]> {
+    return this.getAllResults(`${API_BASE}/tasks/completed/by_due_date`, params);
+  }
+
+  async quickAddTask(data: Record<string, unknown>): Promise<unknown> {
+    return this.request(`${API_BASE}/tasks/quick_add`, {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+  }
+
+  async getProductivityStats(): Promise<unknown> {
+    return this.request(`${API_BASE}/user/productivity_stats`);
   }
 
   // ─── Projects ───
@@ -149,6 +170,10 @@ export class TodoistAPI {
 
   async unarchiveProject(id: string): Promise<unknown> {
     return this.request(`${API_BASE}/projects/${id}/unarchive`, { method: "POST" });
+  }
+
+  async joinProject(id: string): Promise<unknown> {
+    return this.request(`${API_BASE}/projects/${id}/join`, { method: "POST" });
   }
 
   async searchProjects(query: string): Promise<unknown[]> {
@@ -289,6 +314,46 @@ export class TodoistAPI {
 
   async deleteReminder(id: string): Promise<unknown> {
     return this.request(`${API_BASE}/reminders/${id}`, { method: "DELETE" });
+  }
+
+  // ─── Filters ───
+
+  async getFilters(): Promise<unknown[]> {
+    return this.getAllResults(`${API_BASE}/filters`);
+  }
+
+  async getFilter(id: string): Promise<unknown> {
+    return this.request(`${API_BASE}/filters/${id}`);
+  }
+
+  async createFilter(data: Record<string, unknown>): Promise<unknown> {
+    return this.request(`${API_BASE}/filters`, {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+  }
+
+  async updateFilter(id: string, data: Record<string, unknown>): Promise<unknown> {
+    return this.request(`${API_BASE}/filters/${id}`, {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+  }
+
+  async deleteFilter(id: string): Promise<unknown> {
+    return this.request(`${API_BASE}/filters/${id}`, { method: "DELETE" });
+  }
+
+  // ─── Activity ───
+
+  async getActivityLogs(params?: Record<string, string>): Promise<unknown[]> {
+    return this.getAllResults(`${API_BASE}/activity/logs`, params);
+  }
+
+  // ─── Workspaces ───
+
+  async getWorkspaces(): Promise<unknown[]> {
+    return this.getAllResults(`${API_BASE}/workspaces`);
   }
 
   // ─── User ───
