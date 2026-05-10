@@ -34,7 +34,7 @@ function wrapResponsibleUser(query: string, mode: ResponsibleUser): string {
 
 export function createServer(api: TodoistAPI): McpServer {
   const server = new McpServer({
-    name: "todoist-mcp-server",
+    name: "Todoist",
     version: "1.0.0",
   });
 
